@@ -1,0 +1,46 @@
+﻿@model IEnumerable<EmpDetails.EmpDetailsClass>
+@{
+    ViewBag.Title = "Information";
+}
+<h2>Employee Information</h2>
+<p>
+    @Html.ActionLink("Create New Employee", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th> Emp ID </th>
+        <th> Name </th>
+        <th> Email </th>
+        <th> Contact No </th>
+        <th> Company</th>
+        <th> Profile Image </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RowKey)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartitionKey)
+        </td>
+        <td>
+            <img src="@Url.Content(item.ProfileImage)" alt="IMAGES" width="50" height="50" />
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new EmpDetails.EmpDetailsClass(int.Parse(item.RowKey), item.PartitionKey, item.EmpName,item.Email, item.ContactNo, item.ProfileImage))
+            @Html.ActionLink("Delete", "Delete", new  EmpDetails.EmpDetailsClass(int.Parse(item.RowKey), item.PartitionKey))
+        </td>
+    </tr>
+    }
+</table>
